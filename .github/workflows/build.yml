@@ -24,8 +24,10 @@ jobs:
           sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
           pip install --upgrade buildozer cython
 
-      - name: Build with Buildozer
-        run: buildozer -s android debug
+      - name: Accept Android SDK Licenses & Build
+        run: |
+          yes | buildozer -s android debug
+        continue-on-error: false
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
